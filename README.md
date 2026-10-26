@@ -13,40 +13,18 @@
 
 ## 安装到全局（任意项目可用）
 
-前提：已安装 [Claude Code](https://claude.com/claude-code) 和 [gh CLI](https://cli.github.com/)（已 `gh auth login`）。
-
-方式一：克隆本仓库后复制
+前提：已安装 [Claude Code](https://claude.com/claude-code)、[just](https://github.com/casey/just) 和 [gh CLI](https://cli.github.com/)（已 `gh auth login`）。
 
 ```bash
 git clone https://github.com/afeiship/kb-issue-notes.git
 cd kb-issue-notes
-
-# 全局安装 = 复制到 ~/.claude（对所有项目生效）
-mkdir -p ~/.claude/skills ~/.claude/commands
-cp -r .claude/skills/knowledge-base ~/.claude/skills/
-cp .claude/commands/kb.md ~/.claude/commands/
-```
-
-方式二：软链（推荐，本仓库 `git pull` 更新后全局自动同步）
-
-```bash
-git clone https://github.com/afeiship/kb-issue-notes.git
-mkdir -p ~/.claude/skills ~/.claude/commands
-ln -sfn "$(pwd)/.claude/skills/knowledge-base" ~/.claude/skills/knowledge-base
-ln -sf "$(pwd)/.claude/commands/kb.md" ~/.claude/commands/kb.md
-```
-
-方式三：直接 curl 单文件安装（仓库发布后可用 raw 地址）
-
-```bash
-mkdir -p ~/.claude/skills/knowledge-base ~/.claude/commands
-curl -o ~/.claude/skills/knowledge-base/SKILL.md https://raw.githubusercontent.com/afeiship/kb-issue-notes/main/.claude/skills/knowledge-base/SKILL.md
-curl -o ~/.claude/commands/kb.md https://raw.githubusercontent.com/afeiship/kb-issue-notes/main/.claude/commands/kb.md
+just --list   # 查看所有命令
+just install  # 软链安装（git pull 后全局自动同步）
+# just status      # 检查安装状态
+# just uninstall   # 卸载
 ```
 
 安装后重启 Claude Code 会话即可生效（新会话会重新加载 skills/commands）。
-
-> 方式二软链的好处：skill 内容随本仓库更新，`git pull` 一次即可全局生效，无需重复复制。
 
 ### 仅当前项目使用
 

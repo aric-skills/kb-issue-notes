@@ -1,5 +1,5 @@
 # kb-issue-notes 安装管理
-# 用法: just --list 查看, just install / just link / just uninstall
+# 用法: just --list 查看, just install / just status / just uninstall
 
 REPO_DIR := justfile_directory()
 SKILL_SRC := REPO_DIR + "/.claude/skills/knowledge-base"
@@ -12,7 +12,7 @@ CMD_DST := home_directory() / ".claude" / "commands" / "kb.md"
 _default:
     @just --list
 
-# 软链方式安装（推荐，git pull 后全局自动同步）
+# 软链方式安装（git pull 后全局自动同步）
 install:
     mkdir -p ~/.claude/skills ~/.claude/commands
     ln -sfn "{{SKILL_SRC}}" ~/.claude/skills/knowledge-base
