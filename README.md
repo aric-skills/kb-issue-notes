@@ -32,8 +32,8 @@ cp .claude/commands/kb.md ~/.claude/commands/
 ```bash
 git clone https://github.com/afeiship/kb-issue-notes.git
 mkdir -p ~/.claude/skills ~/.claude/commands
-ln -sfn "$(pwd)/kb-issue-notes/.claude/skills/knowledge-base" ~/.claude/skills/knowledge-base
-ln -sf "$(pwd)/kb-issue-notes/.claude/commands/kb.md" ~/.claude/commands/kb.md
+ln -sfn "$(pwd)/.claude/skills/knowledge-base" ~/.claude/skills/knowledge-base
+ln -sf "$(pwd)/.claude/commands/kb.md" ~/.claude/commands/kb.md
 ```
 
 方式三：直接 curl 单文件安装（仓库发布后可用 raw 地址）
