@@ -9,7 +9,7 @@ SKILL_DST := home_directory() / ".claude" / "skills" / "knowledge-base"
 CMD_DST := home_directory() / ".claude" / "commands" / "kb.md"
 
 # 列出所有命令
-default:
+_default:
     @just --list
 
 # 软链方式安装（推荐，git pull 后全局自动同步）
