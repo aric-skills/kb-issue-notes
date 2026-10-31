@@ -20,20 +20,16 @@ description: Use when the user says 【记录】【存知识库】【记下来�
 ## 记录流程
 
 1. **敏感信息过滤**：先剔除密钥、密码、token、API key、内网地址等敏感内容。
-2. **查重**：搜索已有 kb issues，判断主题是否重复：
-   ```bash
+2. **查重**：搜索已有 kb issues，确认没有完全相同的条目（避免原样重复）：
+   ```shell
    gh issue list -R afeiship/issue-notes --label kb --state all --search "<关键词>" --limit 20
    ```
-3. **主题已存在** → 在对应 issue 追加评论，不新建：
-   ```bash
+3. **默认新建 issue**：主题相近也不要往已有 issue 的评论区补充——每篇笔记保持简单、自包含、唯一。**例外**：用户明确说"追加/补充到某个 issue"时，才用评论追加：
+   ```shell
    gh issue comment <number> -R afeiship/issue-notes --body-file <file>
    ```
-4. **主题不存在** → 新建 issue：
-   ```bash
-   gh issue create -R afeiship/issue-notes --label kb --title "<标题>" --body-file <file>
-   ```
-   body 用下面的固定模板，写入临时文件后 `--body-file` 提交（避免 shell 转义问题）。
-5. **信息相近的内容合并**到同一 issue 持续补充，禁止随意批量创建 issue。
+   新建时 body 用下面的固定模板，写入临时文件后 `--body-file` 提交（避免 shell 转义问题）。
+4. 每条笔记一个独立 issue，单一主题、单次记录。仅当内容与已有条目**原样重复**时才跳过写入并告知用户。
 
 ## 固定模板（新建 issue body）
 
@@ -48,17 +44,15 @@ description: Use when the user says 【记录】【存知识库】【记下来�
 <!-- 一两句话说清结论 -->
 
 ## 细节
-<!-- 命令、代码片段、步骤、坑 -->
+<!-- 命令、代码片段、步骤、坑。代码块必须带语言标识（如 ```bash、```js、```just、```json），禁止裸 ``` -->
 
 ## 待验证项
 <!-- 不确定/需要后续验证的点，没有则写"无" -->
 ```
 
-追加评论时复用同一结构，只填有增量的小节。
-
 ## 检索流程
 
-```bash
+```shell
 gh issue list -R afeiship/issue-notes --label kb --state all --search "<关键词>" --limit 20
 gh issue view <number> -R afeiship/issue-notes --comments
 ```
@@ -74,5 +68,7 @@ gh issue view <number> -R afeiship/issue-notes --comments
 
 - 未经预览确认就 `gh issue create/comment`
 - 写入其他仓库的 issue
-- 相近主题另起新 issue 而不是评论追加
+- 用户没明确要求追加时，往旧 issue 评论区补充——应新建独立 issue
+- 为省事把多条无关笔记塞进一个 issue
 - body 里残留密钥/密码
+- 代码块不带语言标识（裸 ```）
