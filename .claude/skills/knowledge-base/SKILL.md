@@ -59,6 +59,34 @@ gh issue view <number> -R afeiship/issue-notes --comments
 
 整理匹配的 issue 标题、结论、细节输出给用户；无匹配时明确说明。
 
+## elp-docs 记录流程
+
+目标仓库固定 `aric-luca/elp-docs`，标签 `kb-elp-docs`（label 不存在时 gh 自动创建）。
+不要写入其他仓库的 issues。由 `/kb-elp-docs` 命令触发。
+
+1. **敏感信息过滤**：同主流程。
+2. **查重**：
+   ```shell
+   gh issue list -R aric-luca/elp-docs --label kb-elp-docs --state all --search "<关键词>" --limit 20
+   ```
+3. **预览确认**：同主流程确认门槛。
+4. **提交**：body 用下面的简化模板，写入临时文件后 `--body-file` 提交：
+   ```shell
+   gh issue create -R aric-luca/elp-docs --label kb-elp-docs --title "<标题>" --body-file <file>
+   ```
+5. 每条笔记一个独立 issue；仅当与已有条目原样重复时跳过并告知用户。
+6. gh 不可用/失败时：输出格式化好的 markdown 让用户手动提交。
+
+### 简化模板（elp-docs issue body）
+
+```markdown
+## 内容
+<笔记正文，代码块必须带语言标识（如 ```bash、```js），禁止裸 ```>
+
+## 来源
+<来源项目/会话/URL，没有则整节省略本节>
+```
+
 ## 确认门槛（必须）
 
 **提交前必须先向用户预览将要写入的完整内容**（标题 + body 或评论内容），获得确认后才执行 `gh` 写操作。

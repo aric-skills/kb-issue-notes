@@ -7,6 +7,7 @@
 ```
 .claude/skills/knowledge-base/SKILL.md   # skill 定义
 .claude/commands/kb.md                   # /kb 快捷命令
+.claude/commands/kb-elp-docs.md          # /kb-elp-docs 快捷命令（elp-docs 仓库）
 ```
 
 知识内容不存放在仓库文件中，而是存放在 `afeiship/issue-notes` 的 Issues 里。
@@ -50,6 +51,12 @@ just install  # 软链安装（git pull 后全局自动同步）
 - 或快捷命令：`/kb 查询:关键词`
 
 Claude 会搜索 kb issues 并整理匹配结果返回。
+
+### elp-docs 记录
+
+- 快捷命令：`/kb-elp-docs xxx`
+
+把笔记提交到 `aric-luca/elp-docs` 仓库（标签 `kb-elp-docs`），使用简化模板（## 内容 + ## 来源），流程同样是过滤 → 查重 → 预览确认后提交。
 
 ## 条目模板
 
